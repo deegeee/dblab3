@@ -2,7 +2,7 @@
 % File Name     : Protokoll.tex
 % Purpose       :
 % Creation Date : 02-12-2013
-% Last Modified : Tue 03 Dec 2013 02:02:49 PM CET
+% Last Modified : Fri 06 Dec 2013 11:05:50 AM CET
 % Created By    :
 %
 
@@ -51,8 +51,8 @@ ER-Schema Autovermietung \\
 Folgendes ER-Schema stellt Geschäftsprozesse der Autovermietung im Groben dar. 
 Das Entity 	Auto besitzt die Attribute autoNr (Primärchlüssel), farbe, model, ps.
 		Kunde besitzt die Attribute kundenNr (Primärschlüssel), geburtsdatum, vorname, nachname.
-Verkäufer besitzt die Attribute personalNr (Primärschlüssel), raum, vorname, nachname.
-Auftrag besitzt die Attribute auftragsNr (Primärschlüssel), datum, sowie die Fremdschlüssel kundenNr, autoNr, personalNr.
+Mitarbeiter besitzt die Attribute personalNr (Primärschlüssel), raum, vorname, nachname.
+mietet besitzt die Attribute auftragsNr (Primärschlüssel), datum, sowie die Fremdschlüssel kundenNr, autoNr, personalNr.
 
 Zwischen Kunde und Auto besteht eine 1:n-Beziehung. Das heißt, dass ein Kunde (theoretisch) beliebig viele Autos mieten kann. Gleichzeitig kann ein Auto nur von einem Kunden gleichzeitig gemietet werden.
 Zwischen Kunde und Verkäufer besteht eine n:m-Beziehung. Ein Kunde kann mehrere Verkäufer haben, die diesem Fahrzeuge vermitteln, gleichzeitig kann ein Verkäufer mehrere Kunden haben.

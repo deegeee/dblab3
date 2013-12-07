@@ -14,7 +14,7 @@ create table Kunde
 	nachname varchar2(50)
 );	
 
-create table Verkaeufer
+create table Mitarbeiter
 (
 	personalNr integer primary key,
 	raum integer,
@@ -22,7 +22,7 @@ create table Verkaeufer
 	nachname varchar2(50)
 );
 
-create table Auftrag
+create table mietet
 (
 	auftragsNr integer primary key,
 	datum date,
