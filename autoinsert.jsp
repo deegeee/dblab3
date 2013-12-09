@@ -50,9 +50,7 @@
                 // Eigenes Statement erzeugen
                 String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
                 // INSERT Befehl
-                if (dbConnection.sqlQuery(query) != null) {
-                    ;
-                }
+                result = dbConnection.sqlQuery(query);
             }
         }
 	%>
