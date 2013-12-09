@@ -49,7 +49,7 @@
 
         if (dbConnection.connectToMySQL()) {
             // INSERT Befehl
-            if (dbConnection.sqlExecute(query)) {
+            if (dbConnection.sqlQuery(query) != null) {
                 // Ausgabe neuer Bestand 
                 result = dbConnection.sqlQuery("select * from Auto");
             } else {

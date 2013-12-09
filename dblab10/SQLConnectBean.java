@@ -47,7 +47,7 @@ public class SQLConnectBean {
         }
     }
 
-    /* Eingabe */
+    /* 
     public boolean sqlExecute(String query) throws SQLException {
         if (isConnected) {
             Statement stmt = dbConnection.createStatement(); 
@@ -58,7 +58,8 @@ public class SQLConnectBean {
         } else {
             return false;
         }
-    }
+    } 
+    */
 
     /* Commit */
     public void commit() throws SQLException {
