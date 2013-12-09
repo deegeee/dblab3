@@ -40,6 +40,7 @@
 		String farbe = request.getParameter("farbe");
 		String model = request.getParameter("model");
 		String ps = request.getParameter("ps");
+        String query = null;
 
         ResultSet result = null;
 
@@ -48,7 +49,8 @@
                 ;
             } else {
                 // Eigenes Statement erzeugen
-                String query = "INSERT INTO Auto VALUES ("+autoNr+", '"+farbe+"', '"+model+"', "+ps+")";
+                query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
+                out.println(query);
                 // INSERT Befehl
                 result = dbConnection.sqlQuery(query);
             }
@@ -64,7 +66,8 @@
 			<th> PS-Zahl </th>
 		</tr>
 			<% 
-                result = dbConnection.sqlQuery("select * from Auto");
+                query = "select * from Auto";
+                result = dbConnection.sqlQuery(query);
 
                 while (result.next()) {
                     out.println("<tr>");
