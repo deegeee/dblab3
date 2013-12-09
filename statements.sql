@@ -77,9 +77,9 @@ values (1, 7, 'James', 'Bond');
 insert into Mitarbeiter
 values (2, 8, 'Johann', 'Zum');
 insert into Mitarbeiter
-values (3, 9, 'Olewa', 'Kack');
+values (3, 9, 'Gesch', 'Mack');
 insert into Mitarbeiter
-values (4, 10, 'Friedrich', 'Shei');
+values (4, 10, 'Rainer', 'Stoff');
 insert into Mitarbeiter
 values (5, 11, 'Ku Wi', 'Wong');
 
