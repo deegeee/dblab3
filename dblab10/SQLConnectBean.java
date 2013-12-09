@@ -42,8 +42,6 @@ public class SQLConnectBean {
         if (isConnected) {
             sqlQueryResult = dbConnection.createStatement().executeQuery(query);
             return sqlQueryResult;
-        } else {
-            return null;
         }
     }
 
