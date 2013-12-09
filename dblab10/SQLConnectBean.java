@@ -50,10 +50,10 @@ public class SQLConnectBean {
     public ResultSet sqlExecute(String query) throws SQLException {
         if (isConnected) {
             Statement stmt = dbConnection.createStatement(); 
-            result = stmt.executeUpdate(query);
+            sqlQueryResult = stmt.executeUpdate(query);
             stmt.close();
             commit();
-            return result;
+            return sqlQueryResult;
         } else {
             return null;
         }
