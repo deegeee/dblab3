@@ -57,7 +57,6 @@
                     out.println("<td>"+result.getString(4)+"</td>");
                     out.println("</tr>");
                 } 
-
                 dbConnection.cleanUp();
             %>
 	</table>	

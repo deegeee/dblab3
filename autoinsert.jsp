@@ -4,6 +4,10 @@
 		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
 	</head>
 	<body>
+
+        <%@ page import="java.util.*"%>
+        <%@ page language="java" import="java.sql.*"%>
+        <jsp:useBean id="dbConnection" class="dblab10.SQLConnectBean" scope="session"/>
 	
 	<form method="POST" action="autoinsert.jsp">
 	
@@ -30,31 +34,22 @@
 	</form>	
 	
 	
-	<%@ page import="java.util.*"%>
-	<%@ page language="java" import="java.sql.*"%>
 	
 	<%
 		String autoNr = request.getParameter("autoNr");
 		String farbe = request.getParameter("farbe");
 		String model = request.getParameter("model");
 		String ps = request.getParameter("ps");
+
+        ResultSet result = null;
+
+        // Eigenes Statement erzeugen
+        String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
+
+        dbConnection.sqlExecute(query);
 		
-		try {
-			// Oracle-Driver laden
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Verbindung zur Datenbank initiieren
-			Connection myconnection = DriverManager.getConnection ("jdbc:oracle:thin:@bert.mi.fh-offenburg.de:1521:orcl", "dblab10", "dblab10");
-			// Eigenes Statement erzeugen
-			Statement mystatement  = myconnection.createStatement();
-			
-			if (autoNr==null)
-				{;}
-			
-			String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
-			ResultSet myresult = mystatement.executeQuery(query);
-			myresult.close();
-			
-			ResultSet result2 = statement.executeQuery("select * from Auto");
+		// Ausgabe	
+        result = dbConnection.sqlQuery("select * from Auto");
 	%>
 	
 	<table>
@@ -65,26 +60,18 @@
 			<th> Modell-Bezeichnung </th>
 			<th> PS-Zahl </th>
 		</tr>
-		<tr>
-			<% while (result2.next())
-			{
-				out.println("<td>"+result2.getString(1)+"</td>");
-				out.println("<td>"+result2.getString(2)+"</td>");
-				out.println("<td>"+result2.getString(3)+"</td>");
-				out.println("<td>"+result2.getString(4)+"</td>");
-			} %>
-		</tr>
+			<% 
+                while (result.next()) {
+                    out.println("<tr>");
+                    out.println("<td>"+result.getString(1)+"</td>");
+                    out.println("<td>"+result.getString(2)+"</td>");
+                    out.println("<td>"+result.getString(3)+"</td>");
+                    out.println("<td>"+result.getString(4)+"</td>");
+                    out.println("<tr>");
+                } 
+                dbConnection.cleanUp();
+            %>
 	</table>	
 			
-	<%		
-			result2.close();
-			mystatement.close();
-			myconnection.close();
-			} catch (Exception e) {out.println("Error: "+e);}
-	%>	
-	
-	
-	
-	
 	</body>
 	</html>				
