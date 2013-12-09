@@ -36,7 +36,6 @@
 	
 	
 	<%
-    /*
 		String autoNr = request.getParameter("autoNr");
 		String farbe = request.getParameter("farbe");
 		String model = request.getParameter("model");
@@ -58,7 +57,6 @@
                 result = dbConnection.sqlQuery("select * from Auto");
             }
         }
-*/
 	%>
 	
 	<table>
@@ -70,7 +68,6 @@
 			<th> PS-Zahl </th>
 		</tr>
 			<% 
-            /*
                 while (result.next()) {
                     out.println("<tr>");
                     out.println("<td>"+result.getString(1)+"</td>");
@@ -80,7 +77,6 @@
                     out.println("<tr>");
                 } 
                 dbConnection.cleanUp();
-             */
             %>
 	</table>	
 			
