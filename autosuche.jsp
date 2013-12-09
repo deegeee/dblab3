@@ -25,11 +25,13 @@
 			// Parameter "autoNr" aus dem POST-Request anfordern und in String name speichern
 			String autoNr = request.getParameter("autoNr");
             ResultSet result = null;
+            String query = null;
 
-			if (autoNr==null) {
-				autoNr="";}
-
-            String query = "SELECT * FROM Auto WHERE autoNr = '" +autoNr+ "' ";
+			if ((autoNr == null) || (autoNr.equals("all"))) {
+                query = "SELECT * FROM Auto";
+            } else {
+                query = "SELECT * FROM Auto WHERE autoNr = '" +autoNr+ "' ";
+            }
 
             if (dbConnection.connectToMySQL()) {
                 result = dbConnection.sqlQuery(query);
