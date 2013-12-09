@@ -48,18 +48,18 @@
 			<th> Modell-Bezeichnung </th>
 			<th> PS-Zahl </th>
 		</tr>
-		<tr>
-			<% while (result.next())
-			{
-				out.println("<td>"+result.getString(1)+"</td>");
-				out.println("<td>"+result.getString(2)+"</td>");
-				out.println("<td>"+result.getString(3)+"</td>");
-				out.println("<td>"+result.getString(4)+"</td>");
-			} 
+			<% 
+                while (result.next()) {
+                    out.println("<tr>");
+                    out.println("<td>"+result.getString(1)+"</td>");
+                    out.println("<td>"+result.getString(2)+"</td>");
+                    out.println("<td>"+result.getString(3)+"</td>");
+                    out.println("<td>"+result.getString(4)+"</td>");
+                    out.println("</tr>");
+                } 
 
-            dbConnection.cleanUp();
+                dbConnection.cleanUp();
             %>
-		</tr>
 	</table>	
 	</body>
 </HTML>		
