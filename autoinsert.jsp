@@ -43,20 +43,15 @@
 
         ResultSet result = null;
 
-        if (autoNr == null) {
-            ;
-        } else {
-            // Eigenes Statement erzeugen
-            String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
-
-            if (dbConnection.connectToMySQL()) {
+        if (dbConnection.connectToMySQL()) {
+            if (autoNr == null) {
+                ;
+            } else {
+                // Eigenes Statement erzeugen
+                String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
                 // INSERT Befehl
                 if (dbConnection.sqlQuery(query) != null) {
-                    // Ausgabe neuer Bestand 
-                    result = dbConnection.sqlQuery("select * from Auto");
-                } else {
-                    // Ausgabe alter Bestand 
-                    result = dbConnection.sqlQuery("select * from Auto");
+                    ;
                 }
             }
         }
@@ -71,6 +66,8 @@
 			<th> PS-Zahl </th>
 		</tr>
 			<% 
+                result = dbConnection.sqlQuery("select * from Auto");
+
                 while (result.next()) {
                     out.println("<tr>");
                     out.println("<td>"+result.getString(1)+"</td>");
