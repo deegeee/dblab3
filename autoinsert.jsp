@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 	<head> 
 		<title> Neues Auto anlegen </title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
 	</head>
 	<body>
 	
-	<form method="POST" action="/PFAD/ZUR/DATEI/autoinsert.jsp">
+	<form method="POST" action="autoinsert.jsp">
 	
-	<h3> Neues Auto anlegen </h3>
+	<h1> Neues Auto anlegen </h1>
 	<fieldset> 
 		<legend> F&uuml;llen Sie bitte die ben&ouml;tigten Felder aus </legend>
 		
@@ -57,16 +58,21 @@
 	%>
 	
 	<table>
+		
 		<tr>
 			<th> auto </th>
 			<th> autafafo </th>
 			<th> autofaf </th>
 		</tr>
-		<tr> 
-			<td> zweite </td>
-			<td> zweitfae </td>
-			<td> zweitfagfsdge </td>
-		</tr>	
+		<tr>
+			<% while (result2.next())
+			{
+				out.println("<td>"+result2.getString(1)+"</td>");
+				out.println("<td>"+result2.getString(2)+"</td>");
+				out.println("<td>"+result2.getString(3)+"</td>");
+				out.println("<td>"+result2.getString(4)+"</td>");
+			} %>
+		</tr>
 	</table>	
 			
 	<%		
@@ -80,4 +86,4 @@
 	
 	
 	</body>
-	</html>				
+	</html>			
