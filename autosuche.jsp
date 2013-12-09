@@ -4,6 +4,11 @@
 		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
 	</head>
 	<body>
+		<!-- // Pakete importieren:-->
+		<%@ page import="java.util.*"%>
+		<%@ page language="java" import="java.sql.*"%>
+        <jsp:useBean id="dbConnection" class="dblab10.SQLConnectBean" scope="session"/>
+
 		<h3> Autos suchen...</h3>
 		
 		<form method="POST" action="autosuche.jsp"> 
@@ -16,29 +21,21 @@
 		
 		</form>
 		
-		
-		<!-- // Pakete importieren:-->
-		<%@ page import="java.util.*"%>
-		<%@ page language="java" import="java.sql.*"%>
-		
 		<%
-			// Parameter "name" aus dem POST-Request anfordern und in String name speichern
+			// Parameter "autoNr" aus dem POST-Request anfordern und in String name speichern
 			String autoNr = request.getParameter("autoNr");
+            ResultSet result = null;
+
 			if (autoNr==null) {
 				autoNr="";}
-			
-			try {
-				// Oracle-Driver laden
-				Class.forName("oracle.jdbc.driver.OracleDriver");
-				// Verbindung zur Datenbank initiieren
-				Connection myconnection = DriverManager.getConnection ("jdbc:oracle:thin:@bert.mi.fh-offenburg.de:1521:orcl", "dblab10", "dblab10");
-				// Eigenes Statement erzeugen
-				Statement mystatement  = myconnection.createStatement();
-				// SQL-Anfrage formulieren
-				String query = "SELECT * FROM Auto WHERE autoNr = '" +autoNr+ "' ";
-				// SQL-Anfrage ausführen
-				ResultSet result_search = mystatement.executeQuery(query);
+
+            String query = "SELECT * FROM Auto WHERE autoNr = '" +autoNr+ "' ";
+
+            if (dbConnection.connectToMySQL()) {
+                result = dbConnection.sqlQuery(query);
+            }
 		%>
+
 		<hr>
 		<p> Suchergebnisse: </p>
 		
@@ -56,20 +53,11 @@
 				out.println("<td>"+result_search.getString(2)+"</td>");
 				out.println("<td>"+result_search.getString(3)+"</td>");
 				out.println("<td>"+result_search.getString(4)+"</td>");
-			} %>
+			} 
+
+            dbConnection.cleanUp();
+            %>
 		</tr>
 	</table>	
-		
-		
-		<%
-			// ResultSet/ Statement/ Verbindung schließen + Fehlerabfang
-			result_search.close();
-			mystatement.close();
-			myconnection.close();
-			} catch(Exception e) {
-				  out.println("Error! Something went wrong!" + e);}
-		%>		  
-				  							
-		
 	</body>
 </HTML>		

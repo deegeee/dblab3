@@ -1,3 +1,4 @@
+/* Tabellen */
 create table Auto
 (        autoNr integer primary key,
         farbe varchar(10),
@@ -30,16 +31,11 @@ create table mietet
         kundenNr integer,
 		datum date,
         autoNr integer,
-        personalNr integer,
+        personalNr integer
 );
 
 
 /* Daten */
-
-
-/* PLATZHALTER aus lab1 muss geaendert werden */
-
-
 /* Auto (int, varchar, varchar, int) */
 insert into Auto
 values (1, 'rot', 'Mercedes SLK 3000', 362);
@@ -51,8 +47,7 @@ insert into Auto
 values (4, 'pink', 'Smart', 1001);
 insert into Auto
 values (5, 'schwarz', 'Hummer', 440);
-
-
+commit;
 
 
 /* Kunde (int, varchar, varchar, date) */
@@ -66,8 +61,6 @@ insert into Kunde
 values (4, 'Wald', 'Traud', '02-JAN-1998 00:00');
 insert into Kunde
 values (5, 'Ger', 'Linde', '01-JAN-1991 00:00');
-
-
 commit;
 
 
@@ -82,13 +75,10 @@ insert into Mitarbeiter
 values (4, 10, 'Rainer', 'Stoff');
 insert into Mitarbeiter
 values (5, 11, 'Ku Wi', 'Wong');
-
 commit;
 
 
 /* Auftrag (int, int, date, int, int) */
-
-
 insert into mietet
 values (1, 2, '01-JAN-2012 00:00', 3, 2);   
 
