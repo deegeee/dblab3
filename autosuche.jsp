@@ -13,7 +13,7 @@
 		
 		<form method="POST" action="autosuche.jsp"> 
 			
-			<label><input type="text" name="autoNr" value="Hier autoNr eingeben..."></label>
+			<label><input type="text" name="autoNr" placeholder="Hier autoNr eingeben..."></label>
 			<br>
 			
 			<input type="submit" value="Suchen">
