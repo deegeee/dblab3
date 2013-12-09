@@ -47,12 +47,12 @@
 			<th> PS-Zahl </th>
 		</tr>
 		<tr>
-			<% while (result_search.next())
+			<% while (result.next())
 			{
-				out.println("<td>"+result_search.getString(1)+"</td>");
-				out.println("<td>"+result_search.getString(2)+"</td>");
-				out.println("<td>"+result_search.getString(3)+"</td>");
-				out.println("<td>"+result_search.getString(4)+"</td>");
+				out.println("<td>"+result.getString(1)+"</td>");
+				out.println("<td>"+result.getString(2)+"</td>");
+				out.println("<td>"+result.getString(3)+"</td>");
+				out.println("<td>"+result.getString(4)+"</td>");
 			} 
 
             dbConnection.cleanUp();
