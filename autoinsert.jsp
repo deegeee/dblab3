@@ -50,7 +50,7 @@
             } else {
                 // Eigenes Statement erzeugen
                 query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
-                out.println(query);
+                out.println("<p>"+query+"</p>");
                 // INSERT Befehl
                 result = dbConnection.sqlQuery(query);
             }

@@ -68,8 +68,12 @@ public class SQLConnectBean {
 
     /* Datenbankverbindung schliessen */
     public void cleanUp() throws SQLException {
-        dbConnection.close();
-        sqlQueryResult.close();
+        if (isConnected) {
+            commit();
+            dbConnection.close();
+            sqlQueryResult.close();
+            isConnected = false;
+        }
     }
 
 }
