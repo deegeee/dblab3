@@ -47,19 +47,17 @@ public class SQLConnectBean {
         }
     }
 
-    /* 
-    public boolean sqlExecute(String query) throws SQLException {
+    public ResultSet sqlExecute(String query) throws SQLException {
         if (isConnected) {
             Statement stmt = dbConnection.createStatement(); 
-            stmt.execute(query);
+            result = stmt.executeUpdate(query);
             stmt.close();
             commit();
-            return true;
+            return result;
         } else {
-            return false;
+            return null;
         }
     } 
-    */
 
     /* Commit */
     public void commit() throws SQLException {
