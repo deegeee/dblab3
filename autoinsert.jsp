@@ -48,7 +48,7 @@
                 ;
             } else {
                 // Eigenes Statement erzeugen
-                String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
+                String query = "INSERT INTO Auto VALUES ("+autoNr+", '"+farbe+"', '"+model+"', "+ps+")";
                 // INSERT Befehl
                 result = dbConnection.sqlQuery(query);
             }
