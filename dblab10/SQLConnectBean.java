@@ -1,4 +1,4 @@
-package db;
+package dblab10;
 
 import java.util.*;
 import java.sql.*;
@@ -8,16 +8,18 @@ public class SQLConnectBean {
 
     private Connection dbConnection;
     private ResultSet sqlQueryResult;
+    private boolean isConnected = false;
 
-    public boolean connectToDB() {
+    /* Verbindung zur Datenbank herstellen */
+    public boolean connectToMySQL() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("The driver loaded");
-
             dbConnection = DriverManager.getConnection ("jdbc:mysql://localhost/dblab?user=user");
+            isConnected = true;
             return true;
         } catch (Exception e) {
             System.out.println("The driver couldn't be loaded");
+            isConnected = false;
             return false;
         }
     }
@@ -25,35 +27,48 @@ public class SQLConnectBean {
     public boolean connectToOrcl() {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-
             dbConnection = DriverManager.getConnection ("jdbc:oracle:thin:@bert.mi.fh-offenburg.de:1521:orcl", "dblab10", "dblab10");
+            isConnected = true;
             return true;
         } catch (Exception e) {
             System.err.println("The driver couldn't be loaded");
+            isConnected = false;
             return false;
         }
     }
 
     /* Ausgabe */
-    public ResultSet sqlQuery(String query) {
-        try {
+    public ResultSet sqlQuery(String query) throws SQLException {
+        if (isConnected) {
             sqlQueryResult = dbConnection.createStatement().executeQuery(query);
             return sqlQueryResult;
-        } catch (Exception e) {
-            System.out.println("Query Failed");
+        } else {
             return null;
         }
     }
+
     /* Eingabe */
     public boolean sqlExecute(String query) throws SQLException {
-        Statement stmt = dbConnection.createStatement(); 
-        stmt.execute(query);
-        commit();
-        return true;
+        if (isConnected) {
+            Statement stmt = dbConnection.createStatement(); 
+            stmt.execute(query);
+            stmt.close();
+            commit();
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /* Commit */
     public void commit() throws SQLException {
         dbConnection.commit();
     }
+
+    /* Datenbankverbindung schliessen */
+    public void cleanUp() throws SQLException {
+        dbConnection.close();
+        sqlQueryResult.close();
+    }
+
 }
