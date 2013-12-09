@@ -49,9 +49,13 @@
 
         if (dbConnection.connectToMySQL()) {
             // INSERT Befehl
-            dbConnection.sqlExecute(query);
-            // Ausgabe neuer Bestand 
-            result = dbConnection.sqlQuery("select * from Auto");
+            if (dbConnection.sqlExecute(query)) {
+                // Ausgabe neuer Bestand 
+                result = dbConnection.sqlQuery("select * from Auto");
+            } else {
+                // Ausgabe alter Bestand 
+                result = dbConnection.sqlQuery("select * from Auto");
+            }
         }
 	%>
 	
