@@ -1,11 +1,12 @@
 <!DOCTYPE HTML>
 	<head>
 		<title> Autos suchen... </title>
+		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
 	</head>
 	<body>
 		<h3> Autos suchen...</h3>
 		
-		<form method="POST" action="/PFAD/ZUR/DATEI/autosuche.jsp"> 
+		<form method="POST" action="autosuche.jsp"> 
 			
 			<label><input type="text" name="autoNr" value="Hier autoNr eingeben..."></label>
 			<br>
@@ -34,25 +35,31 @@
 				// Eigenes Statement erzeugen
 				Statement mystatement  = myconnection.createStatement();
 				// SQL-Anfrage formulieren
-				String query = "SELECT * FROM Auto WHERE autoNr == '" +autoNr+ "' ";
+				String query = "SELECT * FROM Auto WHERE autoNr = '" +autoNr+ "' ";
 				// SQL-Anfrage ausführen
 				ResultSet result_search = mystatement.executeQuery(query);
 		%>
 		<hr>
 		<p> Suchergebnisse: </p>
 		
-		<ul> <!-- Punktliste-->
-			<%
-				// Solange unser ResultSet noch weitere "Treffer"-Objekte beinhaltet...
-				while(result_search.next())
-				{
-			%>
-				<!-- Gebe diese Treffer in einer Liste in HTML aus -->
-				<!-- getString(1) steht für die erste Spalte der Tabelle von der SELECT-Anfrage -->
-					<li> <%=result_search.getString(1)%> </li>
-								
-				<% } %>
-		</ul>
+	<table>	
+		<tr>
+			<th> Autonummer </th>
+			<th> Farbe </th>
+			<th> Modell-Bezeichnung </th>
+			<th> PS-Zahl </th>
+		</tr>
+		<tr>
+			<% while (result_search.next())
+			{
+				out.println("<td>"+result_search.getString(1)+"</td>");
+				out.println("<td>"+result_search.getString(2)+"</td>");
+				out.println("<td>"+result_search.getString(3)+"</td>");
+				out.println("<td>"+result_search.getString(4)+"</td>");
+			} %>
+		</tr>
+	</table>	
+		
 		
 		<%
 			// ResultSet/ Statement/ Verbindung schließen + Fehlerabfang
