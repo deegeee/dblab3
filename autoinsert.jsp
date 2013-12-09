@@ -41,15 +41,16 @@
 		String model = request.getParameter("model");
 		String ps = request.getParameter("ps");
 
+
         ResultSet result = null;
 
         // Eigenes Statement erzeugen
         String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
 
-        // Ausgabe aktueller Bestand falls sqlExecute fehlschlaegt
-        result = dbConnection.sqlQuery("select * from Auto");
-
-        if (dbConnection.sqlExecute(query)) {
+        if (dbConnection.connectToMySQL()) {
+            // INSERT Befehl
+            dbConnection.sqlExecute(query);
+            // Ausgabe neuer Bestand 
             result = dbConnection.sqlQuery("select * from Auto");
         }
 	%>
