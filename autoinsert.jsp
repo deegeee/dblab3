@@ -41,20 +41,23 @@
 		String model = request.getParameter("model");
 		String ps = request.getParameter("ps");
 
-
         ResultSet result = null;
 
-        // Eigenes Statement erzeugen
-        String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
+        if (autoNr == null) {
+            ;
+        } else {
+            // Eigenes Statement erzeugen
+            String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
 
-        if (dbConnection.connectToMySQL()) {
-            // INSERT Befehl
-            if (dbConnection.sqlQuery(query) != null) {
-                // Ausgabe neuer Bestand 
-                result = dbConnection.sqlQuery("select * from Auto");
-            } else {
-                // Ausgabe alter Bestand 
-                result = dbConnection.sqlQuery("select * from Auto");
+            if (dbConnection.connectToMySQL()) {
+                // INSERT Befehl
+                if (dbConnection.sqlQuery(query) != null) {
+                    // Ausgabe neuer Bestand 
+                    result = dbConnection.sqlQuery("select * from Auto");
+                } else {
+                    // Ausgabe alter Bestand 
+                    result = dbConnection.sqlQuery("select * from Auto");
+                }
             }
         }
 	%>
