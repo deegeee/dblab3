@@ -47,13 +47,12 @@ public class SQLConnectBean {
         }
     }
 
-    public ResultSet sqlExecute(String query) throws SQLException {
+    /* Aendern */
+    public void sqlExecute(String query) throws SQLException {
         if (isConnected) {
-            Statement stmt = dbConnection.createStatement(); 
-            sqlQueryResult = stmt.executeUpdate(query);
-            stmt.close();
-            commit();
-            return sqlQueryResult;
+            if (dbConnection.createStatement().execute(query)) {
+                commit();
+            }
         } else {
             return null;
         }
