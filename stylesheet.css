@@ -1,3 +1,23 @@
 body {
-		background-color: rgb(255,105,180);
+		background-color: rgb(0,210,255);
 	}	
+h1 	{
+		font-family: Helvetica;
+		text-decoration: underline;
+		text-align: center;
+		color: white;
+		background-color: blue;
+	}
+a	{
+		text-decoration: none;
+		font-family: Helvetica;
+		font-style: italic;
+		color: red;
+		font-size: 13pt;
+		font-weight: 100;
+	}
+p	{
+		color: white;
+		font-weight: 500;
+		font-size: 14pt;
+	}
