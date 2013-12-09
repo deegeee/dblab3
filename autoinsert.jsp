@@ -60,9 +60,10 @@
 	<table>
 		
 		<tr>
-			<th> auto </th>
-			<th> autafafo </th>
-			<th> autofaf </th>
+			<th> Autonummer </th>
+			<th> Farbe </th>
+			<th> Modell-Bezeichnung </th>
+			<th> PS-Zahl </th>
 		</tr>
 		<tr>
 			<% while (result2.next())
@@ -86,4 +87,4 @@
 	
 	
 	</body>
-	</html>			
+	</html>				
