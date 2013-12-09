@@ -53,6 +53,7 @@
                 out.println("<p>"+query+"</p>");
                 // INSERT Befehl
                 result = dbConnection.sqlQuery(query);
+                dbConnection.commit();
             }
         }
 	%>
