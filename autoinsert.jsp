@@ -46,10 +46,12 @@
         // Eigenes Statement erzeugen
         String query = "INSERT INTO Auto VALUES ('"+autoNr+"', '"+farbe+"', '"+model+"', '"+ps+"')";
 
-        dbConnection.sqlExecute(query);
-		
-		// Ausgabe	
+        // Ausgabe aktueller Bestand falls sqlExecute fehlschlaegt
         result = dbConnection.sqlQuery("select * from Auto");
+
+        if (dbConnection.sqlExecute(query)) {
+            result = dbConnection.sqlQuery("select * from Auto");
+        }
 	%>
 	
 	<table>
