@@ -34,6 +34,7 @@
             }
 
             if (dbConnection.connectToMySQL()) {
+            //if (dbConnection.connectToOrcl()) {
                 result = dbConnection.sqlQuery(query);
             }
 		%>

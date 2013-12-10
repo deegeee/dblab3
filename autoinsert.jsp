@@ -45,6 +45,7 @@
         ResultSet result = null;
 
         if (dbConnection.connectToMySQL()) {
+        //if (dbConnection.connectToOrcl()) {
             if (autoNr == null) {
                 ;
             } else {
