@@ -76,7 +76,7 @@
                     out.println("<td>"+result.getString(2)+"</td>");
                     out.println("<td>"+result.getString(3)+"</td>");
                     out.println("<td>"+result.getString(4)+"</td>");
-                    out.println("<tr>");
+                    out.println("</tr>");
                 } 
                 dbConnection.cleanUp();
             %>
