@@ -9,7 +9,7 @@
 		<%@ page language="java" import="java.sql.*"%>
         <jsp:useBean id="dbConnection" class="dblab10.SQLConnectBean" scope="session"/>
 
-		<h3> Autos suchen...</h3>
+		<h1> Autos suchen...</h1>
 		
 		<form method="POST" action="kundensuche.jsp"> 
 			
