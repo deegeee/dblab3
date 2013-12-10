@@ -4,6 +4,10 @@
 		<link rel="stylesheet" href="stylesheet.css" type="text/css" />
 	</head>
 	<body>
+
+        <%@ page import="java.util.*"%>
+        <%@ page language="java" import="java.sql.*"%>
+        <jsp:useBean id="dbConnection" class="dblab10.SQLConnectBean" scope="session"/>
 	
 	<form method="POST" action="kundeninsert.jsp">
 	
@@ -11,10 +15,10 @@
 	<fieldset> 
 		<legend> F&uuml;llen Sie bitte die ben&ouml;tigten Felder aus </legend>
 		
-		<label> kundenNr ---- <input type="text" name="kundenNr" value=""> </label><br>
-		<label> vorname -----<input type="text" name="vorname" value=""></label><br>
-		<label> nachname --- <input	type="text" name="nachname" value=""> </label> <br>
-		<label> geburtsdatum  <input type="text" name="geburtsdatum" value=""> </label> <br>
+		<label> kundenNr ------------- <input type="text" name="kundenNr" value=""> </label><br>
+		<label> vorname  ------------- <input type="text" name="vorname" value=""></label><br>
+		<label> nachname ------------- <input type="text" name="nachname" value=""> </label> <br>
+		<label> geburtsdatum --------- <input type="text" name="geburtsdatum" placeholder="TT-MON-YYYY"> </label> <br>
 	</fieldset>
 	<br>
 	<input type="submit" value="Anlegen">
@@ -22,61 +26,53 @@
 	</form>	
 	
 	
-	<%@ page import="java.util.*"%>
-	<%@ page language="java" import="java.sql.*"%>
 	
 	<%
 		String kundenNr = request.getParameter("kundenNr");
 		String vorname = request.getParameter("vorname");
 		String nachname = request.getParameter("nachname");
 		String geburtsdatum = request.getParameter("geburtsdatum");
-		
-		try {
-			// Oracle-Driver laden
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Verbindung zur Datenbank initiieren
-			Connection myconnection = DriverManager.getConnection ("jdbc:oracle:thin:@bert.mi.fh-offenburg.de:1521:orcl", "dblab10", "dblab10");
-			// Eigenes Statement erzeugen
-			Statement mystatement  = myconnection.createStatement();
-			
-			if (kundenNr==null)
-				{;}
-			
-			String query = "INSERT INTO Kunde VALUES ('"+kundenNr+"', '"+vorname+"', '"+nachname+"', '"+geburtsdatum+"')";
-			ResultSet myresult = mystatement.executeQuery(query);
-			myresult.close();
-			
-			ResultSet result2 = statement.executeQuery("select * from Kunde");
+        String query = null;
+
+        ResultSet result = null;
+
+        if (dbConnection.connectToMySQL()) {
+        //if (dbConnection.connectToOrcl()) {
+            if (kundenNr == null) {
+                ;
+            } else {
+                // Eigenes Statement erzeugen
+                query = "INSERT INTO Kunde VALUES ('"+kundenNr+"', '"+vorname+"', '"+nachname+"', '"+geburtsdatum+"')";
+                //out.println("<p>"+query+"</p>");
+                // INSERT Befehl
+                dbConnection.sqlExecute(query);
+            }
+        }
 	%>
 	
 	<table>
 		
 		<tr>
-			<th> Autonummer </th>
-			<th> vorname </th>
-			<th> nachnamel-Bezeichnung </th>
-			<th> geburtsdatum-Zahl </th>
+			<th> Kundennummer </th>
+			<th> Vorname </th>
+			<th> Nachname </th>
+			<th> Geburtsdatum </th>
 		</tr>
-		<tr>
-			<% while (result2.next())
-			{
-				out.println("<td>"+result2.getString(1)+"</td>");
-				out.println("<td>"+result2.getString(2)+"</td>");
-				out.println("<td>"+result2.getString(3)+"</td>");
-				out.println("<td>"+result2.getString(4)+"</td>");
-			} %>
-		</tr>
+			<% 
+                query = "select * from Kunde";
+                result = dbConnection.sqlQuery(query);
+
+                while (result.next()) {
+                    out.println("<tr>");
+                    out.println("<td>"+result.getString(1)+"</td>");
+                    out.println("<td>"+result.getString(2)+"</td>");
+                    out.println("<td>"+result.getString(3)+"</td>");
+                    out.println("<td>"+result.getString(4)+"</td>");
+                    out.println("</tr>");
+                } 
+                dbConnection.cleanUp();
+            %>
 	</table>	
 			
-	<%		
-			result2.close();
-			mystatement.close();
-			myconnection.close();
-			} catch (Exception e) {out.println("Error: "+e);}
-	%>	
-	
-	
-	
-	
 	</body>
 	</html>				
